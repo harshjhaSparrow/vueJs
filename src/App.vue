@@ -6,6 +6,8 @@ const htmlContent = ref("<strong>Important:</strong> <em>Read this</em>");
 const url = ref("https://www.example.com");
 const imgSrc = ref("https://via.placeholder.com/150");
 const buttonDisabled = ref(false);
+const number = ref(0);
+const showElementBoolean = ref(true);
 const inputValue = ref("");
 const isLarge = ref(false); // Boolean for conditional style
 // Define styles conditionally
@@ -35,6 +37,11 @@ const class2 = ref("highlighted"); // This should be a class name as a string
     <div :style="computedStyles">This div will have conditional styles</div>
     <div class="classx">Biding of class</div>
     <div :class="class2">Bindg of class2</div>
+    <!-- Conditional rendering with v-else-if and v-else -->
+    <div v-if="number > 10">Number is greater than 10</div>
+    <div v-else-if="number === 10">Number is exactly 10</div>
+    <div v-else>Number is less than 10</div>
+    <div v-show="showElementBoolean">This depends on v-show:booleanValue</div>
   </div>
 </template>
 
