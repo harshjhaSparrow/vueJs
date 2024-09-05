@@ -29,7 +29,13 @@ const inputValue = ref("");
 
     <!-- Binding value attribute to an input field -->
     <input v-model="inputValue" placeholder="Type something here" />
+
+    <div class="underlineClass">This is underlined class.</div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.underlineClass {
+  text-decoration: underline;
+}
+</style>
