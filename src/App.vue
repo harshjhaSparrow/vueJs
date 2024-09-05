@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
+
 // Define reactive data
 const message = ref("Welcome to Vue 3 with TypeScript!");
 const htmlContent = ref("<strong>Important:</strong> <em>Read this</em>");
@@ -10,6 +11,13 @@ const number = ref(0);
 const showElementBoolean = ref(true);
 const inputValue = ref("");
 const isLarge = ref(false); // Boolean for conditional style
+const items = ref(["Apple", "Banana", "Cherry"]); // List of items for rendering
+// Define a list of objects
+const fruits = ref([
+  { name: "Apple", color: "Red" },
+  { name: "Banana", color: "Yellow" },
+  { name: "Cherry", color: "Red" },
+]);
 // Define styles conditionally
 const computedStyles: any = reactive({
   backgroundColor: "yellow",
@@ -42,6 +50,19 @@ const class2 = ref("highlighted"); // This should be a class name as a string
     <div v-else-if="number === 10">Number is exactly 10</div>
     <div v-else>Number is less than 10</div>
     <div v-show="showElementBoolean">This depends on v-show:booleanValue</div>
+
+    <!-- List rendering with v-for -->
+    <ul>
+      <li v-for="item in items" :key="item">
+        {{ item }}
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(fruit, index) in fruits" :key="index">
+        {{ fruit.name }} -
+        <span :style="{ color: fruit.color }">{{ fruit.color }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -53,7 +74,7 @@ const class2 = ref("highlighted"); // This should be a class name as a string
   background-color: aqua;
 }
 .class2 {
-  color: "red";
+  color: red; /* Fix color definition */
 }
 .large-text {
   font-size: 24px;
