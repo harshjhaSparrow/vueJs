@@ -11,10 +11,13 @@ const inputValue = ref("");
 const isLarge = ref(false); // Boolean for conditional style
 
 // Define styles conditionally
-const computedStyles:any = reactive({
+const computedStyles: any = reactive({
   backgroundColor: "yellow",
   fontSize: isLarge.value ? "24px" : "16px",
 });
+
+// Define reactive data
+const class2 = ref("highlighted"); // This should be a class name as a string
 </script>
 
 <template>
@@ -39,12 +42,22 @@ const computedStyles:any = reactive({
 
     <!-- Conditional style binding -->
     <div :style="computedStyles">This div will have conditional styles</div>
+    <div class="classx">Biding of class</div>
+    <div :class="class2">Bindg of class2</div>
   </div>
 </template>
 
 <style scoped>
 .highlighted {
   background-color: yellow;
+}
+
+.classx {
+  background-color: aqua;
+}
+
+.class2 {
+  color: "red";
 }
 
 .large-text {
