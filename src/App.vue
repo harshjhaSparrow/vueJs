@@ -40,6 +40,11 @@ const decrement = () => {
 const reset = () => {
   count.value = 0;
 };
+
+const handleSubmit = (e: { preventDefault: () => void }) => {
+  e.preventDefault();
+  console.log("Form submitted", inputValue?._value);
+};
 </script>
 
 <template>
@@ -53,9 +58,11 @@ const reset = () => {
     <!-- Binding src attribute to an image URL -->
     <img :src="imgSrc" alt="Placeholder Image" />
     <!-- Binding disabled attribute to a boolean -->
-    <button :disabled="buttonDisabled">Submit</button>
     <!-- Binding value attribute to an input field -->
     <input v-model="inputValue" placeholder="Type something here" />
+    <button @click="handleSubmit" :disabled="buttonDisabled">
+      Submit
+    </button>
     <!-- Conditional style binding -->
     <div :style="computedStyles">This div will have conditional styles</div>
     <div class="classx">Biding of class</div>
