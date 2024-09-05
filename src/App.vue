@@ -25,6 +25,21 @@ const computedStyles: any = reactive({
 });
 // Define reactive data
 const class2 = ref("highlighted"); // This should be a class name as a string
+// Define reactive data
+const count = ref(0);
+// Method to increase the count
+const increment = () => {
+  count.value++;
+};
+
+const decrement = () => {
+  count.value--;
+};
+
+// Method to reset the count
+const reset = () => {
+  count.value = 0;
+};
 </script>
 
 <template>
@@ -63,6 +78,12 @@ const class2 = ref("highlighted"); // This should be a class name as a string
         <span :style="{ color: fruit.color }">{{ fruit.color }}</span>
       </li>
     </ul>
+  </div>
+  <div>
+    <p>Count: {{ count }}</p>
+    <button @click="increment">Increment</button>
+    <button @click="reset">Reset</button>
+    <button @click="decrement">Decrement</button>
   </div>
 </template>
 
