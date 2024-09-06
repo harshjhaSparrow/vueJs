@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 
 // Define reactive data
 const message = ref("Welcome to Vue 3 with TypeScript!");
@@ -9,24 +9,21 @@ const imgSrc = ref("https://via.placeholder.com/150");
 const buttonDisabled = ref(false);
 const number = ref(0);
 const showElementBoolean = ref(true);
-const inputValue = ref("");
+const inputValue = reactive({
+  name: "",
+});
 const isLarge = ref(false); // Boolean for conditional style
-const items = ref(["Apple", "Banana", "Cherry"]); // List of items for rendering
-// Define a list of objects
-const fruits = ref([
-  { name: "Apple", color: "Red" },
-  { name: "Banana", color: "Yellow" },
-  { name: "Cherry", color: "Red" },
-]);
-// Define styles conditionally
-const computedStyles: any = reactive({
+
+// Computed styles
+const computedStyles = computed(() => ({
   backgroundColor: "yellow",
   fontSize: isLarge.value ? "24px" : "16px",
-});
-// Define reactive data
+}));
+
 const class2 = ref("highlighted"); // This should be a class name as a string
-// Define reactive data
+
 const count = ref(0);
+
 // Method to increase the count
 const increment = () => {
   count.value++;
@@ -41,10 +38,21 @@ const reset = () => {
   count.value = 0;
 };
 
-const handleSubmit = (e: { preventDefault: () => void }) => {
+// Form submission handler
+const handleSubmit = (e: Event) => {
   e.preventDefault();
-  console.log("Form submitted", inputValue?._value);
+  console.log("Form submitted", inputValue.name);
 };
+
+// List of items for rendering
+const items = ref(["Apple", "Banana", "Cherry"]);
+
+// List of objects
+const fruits = ref([
+  { name: "Apple", color: "Red" },
+  { name: "Banana", color: "Yellow" },
+  { name: "Cherry", color: "Red" },
+]);
 </script>
 
 <template>
@@ -59,14 +67,12 @@ const handleSubmit = (e: { preventDefault: () => void }) => {
     <img :src="imgSrc" alt="Placeholder Image" />
     <!-- Binding disabled attribute to a boolean -->
     <!-- Binding value attribute to an input field -->
-    <input v-model="inputValue" placeholder="Type something here" />
-    <button @click="handleSubmit" :disabled="buttonDisabled">
-      Submit
-    </button>
+    <input v-model="inputValue.name" placeholder="Type something here" />
+    <button @click="handleSubmit" :disabled="buttonDisabled">Submit</button>
     <!-- Conditional style binding -->
     <div :style="computedStyles">This div will have conditional styles</div>
-    <div class="classx">Biding of class</div>
-    <div :class="class2">Bindg of class2</div>
+    <div class="classx">Binding of class</div>
+    <div :class="class2">Binding of class2</div>
     <!-- Conditional rendering with v-else-if and v-else -->
     <div v-if="number > 10">Number is greater than 10</div>
     <div v-else-if="number === 10">Number is exactly 10</div>
@@ -91,6 +97,14 @@ const handleSubmit = (e: { preventDefault: () => void }) => {
     <button @click="increment">Increment</button>
     <button @click="reset">Reset</button>
     <button @click="decrement">Decrement</button>
+  </div>
+
+  <div>
+    <label for="name">Name</label>
+    <form @submit="handleSubmit">
+      <input type="text" v-model="inputValue.name" id="name" />
+      <button type="submit" :disabled="buttonDisabled">Submit</button>
+    </form>
   </div>
 </template>
 
