@@ -59,24 +59,33 @@ const fruits = ref([
   <div>
     <!-- Binding href attribute to a URL -->
     <a :href="url" target="_blank">Visit Example</a>
+    
     <!-- Displaying text with v-text -->
     <p v-text="message"></p>
+    
     <!-- Displaying HTML content with v-html -->
     <div v-html="htmlContent"></div>
+    
     <!-- Binding src attribute to an image URL -->
     <img :src="imgSrc" alt="Placeholder Image" />
+    
     <!-- Binding disabled attribute to a boolean -->
-    <!-- Binding value attribute to an input field -->
-    <input v-model="inputValue.name" placeholder="Type something here" />
+    <input v-model.lazy="inputValue.name" placeholder="Type something here" />
     <button @click="handleSubmit" :disabled="buttonDisabled">Submit</button>
+    
     <!-- Conditional style binding -->
     <div :style="computedStyles">This div will have conditional styles</div>
+    
+    <!-- Binding classes with v-bind -->
     <div class="classx">Binding of class</div>
     <div :class="class2">Binding of class2</div>
-    <!-- Conditional rendering with v-else-if and v-else -->
+    
+    <!-- Conditional rendering with v-if, v-else-if, and v-else -->
     <div v-if="number > 10">Number is greater than 10</div>
     <div v-else-if="number === 10">Number is exactly 10</div>
     <div v-else>Number is less than 10</div>
+    
+    <!-- Conditional rendering with v-show -->
     <div v-show="showElementBoolean">This depends on v-show:booleanValue</div>
 
     <!-- List rendering with v-for -->
@@ -85,6 +94,7 @@ const fruits = ref([
         {{ item }}
       </li>
     </ul>
+    
     <ul>
       <li v-for="(fruit, index) in fruits" :key="index">
         {{ fruit.name }} -
@@ -92,6 +102,7 @@ const fruits = ref([
       </li>
     </ul>
   </div>
+  
   <div>
     <p>Count: {{ count }}</p>
     <button @click="increment">Increment</button>
@@ -101,8 +112,8 @@ const fruits = ref([
 
   <div>
     <label for="name">Name</label>
-    <form @submit="handleSubmit">
-      <input type="text" v-model="inputValue.name" id="name" />
+    <form @submit.prevent="handleSubmit">
+      <input type="text" v-model.number="inputValue.name" id="name" />
       <button type="submit" :disabled="buttonDisabled">Submit</button>
     </form>
   </div>
