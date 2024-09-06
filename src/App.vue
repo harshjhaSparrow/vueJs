@@ -20,9 +20,14 @@ const computedStyles = computed(() => ({
   fontSize: isLarge.value ? "24px" : "16px",
 }));
 
-const class2 = ref("highlighted"); // This should be a class name as a string
-
 const count = ref(0);
+
+// Computed property to format the count value
+const formattedCount = computed(() => {
+  return `The current count is ${count.value}`;
+});
+
+const class2 = ref("highlighted"); // This should be a class name as a string
 
 // Method to increase the count
 const increment = () => {
@@ -104,7 +109,8 @@ const fruits = ref([
   </div>
   
   <div>
-    <p>Count: {{ count }}</p>
+    <!-- Using computed property to display formatted count -->
+    <p>{{ formattedCount }}</p>
     <button @click="increment">Increment</button>
     <button @click="reset">Reset</button>
     <button @click="decrement">Decrement</button>
