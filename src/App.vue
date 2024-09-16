@@ -15,6 +15,11 @@ const inputValue = reactive({
 });
 const isLarge = ref(false); // Boolean for conditional style
 
+// Provide the data
+provide("providedData", {
+  message: "Hello from Parent!",
+  count: 42,
+});
 // Computed styles
 const computedStyles = computed(() => ({
   backgroundColor: "yellow",
@@ -91,6 +96,13 @@ provide("providedData", providedObject);
 </script>
 
 <template>
+  <NewComponent
+    title="Welcome to the New Component!"
+    message="This is a custom message from the parent component."
+    id="unique-id"
+    class="custom-class"
+    style="color: blue"
+  />
   <div>
     <!-- Binding href attribute to a URL -->
     <a :href="url" target="_blank">Visit Example</a>
@@ -137,6 +149,7 @@ provide("providedData", providedObject);
       </li>
     </ul>
   </div>
+  provide and inject
 
   <div>
     <!-- Using computed property to display formatted count -->
